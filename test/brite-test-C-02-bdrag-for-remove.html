@@ -1,0 +1,47 @@
+<!DOCTYPE html >
+<html >
+    <header>
+    <title>Destroy an element via bdragend</title>
+    <script type="text/javascript" src="../js-dependencies/jquery.js" ></script>
+    <script type="text/javascript" src="js/sTestHelper.js" ></script>
+    <script type="text/javascript">
+      $( function() {
+        showTestSources();
+      });
+    </script>
+    <style>
+      .box {
+        cursor: pointer;
+        border: 1px solid black;
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        top: 100px;
+        left: 20px;
+      }
+    </style>
+    <!-- /Generic Test Includes -->
+
+    <script type="text/javascript" src="../src/js/brite.core.js" ></script>
+    <script type="text/javascript" src="../src/js/brite.event.js" ></script>
+</header>
+<body class="c">
+<p>When I do a <code>$(e.currentTarget).bRmove()</code> on a <code>bdragend</code> event, an error appear : <q>BDragCtx is undefined</q>.</p>
+    <div class="box">Drag me to destroy</div>
+    <div class="box" style="left:100px">Drag me to destroy</div>
+    
+    <script type="text/javascript">
+        $(function() {
+           $('div').on('bdragmove', function(e){
+              var $div = $(e.currentTarget);
+              $div.css('top', parseInt($div.css('top'),10) + e.bextra.deltaY);
+              $div.css('left', parseInt($div.css('left'),10) + e.bextra.deltaX);
+          });
+          $('div').on('bdragend', function(e){
+              $(e.currentTarget).bRemove();
+          }) ;
+        });
+      </script>
+  </body>
+
+</html>

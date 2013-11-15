@@ -205,6 +205,12 @@ brite.event = brite.event || {};
       var $document = $(document);
       var uid = "_" + brite.uuid(7);
       
+      //  this allow to prevent multiple triggering without having to use the stopPropagation
+      if(event.originalEvent.b_processed){
+        return;
+      }
+      
+      event.originalEvent.b_processed = true;
       // drag move (and start)
       $document.on(tapEvents.move + "." + uid,function(event){
         
